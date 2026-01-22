@@ -125,7 +125,7 @@ if (image && secretText) {
   let clickCount = 0;
   let loaded = false;
 
-  const SECRET_URL = "/サークルサイト/js/secret.txt";
+  const SECRET_URL = "./secret.txt";
 
   image.addEventListener("click", async () => {
     clickCount++;
