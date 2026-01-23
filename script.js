@@ -38,82 +38,108 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /*
-   * こする（スクラッチ）
-   */
-  const space = document.getElementById("mystery-space");
-  const message = document.getElementById("secret-message");
+ /*
+ * スクラッチ
+ */
+const space = document.getElementById("mystery-space");
+const message = document.getElementById("secret-message");
 
-  if (space && message) {
-    let scratchDistance = 0;
-    let lastX = 0;
-    let lastY = 0;
-    let isScrubbing = false;
+if (space && message) {
+  let scratchDistance = 0;
+  let lastX = 0;
+  let lastY = 0;
+  let isScrubbing = false;
 
-    const threshold = 5000; // こする量
-    let revealed = false;
+  const threshold = 5000; // こする量
+  let revealed = false;
 
-    function reveal() {
-      if (revealed) return;
-      revealed = true;
+
+  const SECRET_URL = "./scratch.txt";
+
+  async function reveal() {
+    if (revealed) return;
+    revealed = true;
+
+    if (location.protocol === "file:") {
+      message.textContent =
+        "※このページはGitHub Pagesで表示されます。";
       message.style.opacity = "1";
-      space.classList.add("revealed");
+      return;
     }
 
-    function handleMove(e) {
-      if (!isScrubbing) return;
+    try {
+      const res = await fetch(encodeURI(SECRET_URL), { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-      if (lastX !== 0 && lastY !== 0) {
-        const dx = clientX - lastX;
-        const dy = clientY - lastY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        scratchDistance += dist;
-
-        if (scratchDistance > threshold) reveal();
-      }
-
-      lastX = clientX;
-      lastY = clientY;
+      const text = (await res.text()).trim();
+      message.textContent = text || "（メッセージが空です）";
+    } catch (e) {
+      message.textContent =
+        "読み込みに失敗しました。scratch.txt の配置を確認してください。";
+      console.error(e);
     }
 
-    const startScrub = () => {
-      isScrubbing = true;
-    };
-    const stopScrub = () => {
-      isScrubbing = false;
-      lastX = 0;
-      lastY = 0;
-    };
-
-    // PC
-    space.addEventListener("mousedown", startScrub);
-    window.addEventListener("mouseup", stopScrub);
-    space.addEventListener("mousemove", handleMove);
-
-    // スマホ
-    space.addEventListener(
-      "touchstart",
-      (e) => {
-        if (e.cancelable) e.preventDefault();
-        startScrub();
-      },
-      { passive: false }
-    );
-
-    space.addEventListener("touchend", stopScrub);
-
-    space.addEventListener(
-      "touchmove",
-      (e) => {
-        if (e.cancelable) e.preventDefault();
-        handleMove(e);
-      },
-      { passive: false }
-    );
+    message.style.opacity = "1";
+    space.classList.add("revealed");
   }
+
+  function handleMove(e) {
+    if (!isScrubbing || revealed) return;
+
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    if (lastX !== 0 && lastY !== 0) {
+      const dx = clientX - lastX;
+      const dy = clientY - lastY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      scratchDistance += dist;
+
+      if (scratchDistance > threshold) {
+        reveal(); 
+      }
+    }
+
+    lastX = clientX;
+    lastY = clientY;
+  }
+
+  const startScrub = () => {
+    isScrubbing = true;
+  };
+
+  const stopScrub = () => {
+    isScrubbing = false;
+    lastX = 0;
+    lastY = 0;
+  };
+
+  // PC
+  space.addEventListener("mousedown", startScrub);
+  window.addEventListener("mouseup", stopScrub);
+  space.addEventListener("mousemove", handleMove);
+
+  // スマホ
+  space.addEventListener(
+    "touchstart",
+    (e) => {
+      if (e.cancelable) e.preventDefault();
+      startScrub();
+    },
+    { passive: false }
+  );
+
+  space.addEventListener("touchend", stopScrub);
+
+  space.addEventListener(
+    "touchmove",
+    (e) => {
+      if (e.cancelable) e.preventDefault();
+      handleMove(e);
+    },
+    { passive: false }
+  );
+}
 
   /* 
    * 画像を5回クリック → secret.txt を読み込んで表示
