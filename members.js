@@ -5,7 +5,7 @@ const members = [
       "edb465624291e4053c6c5ea4b7eb320dec773e10a57d26b95dcf0564f8e310f8", // note
       "82b15b1310a3d4903fc1926d4f039e17acb9d9145a2650e0c011c4078bb99118"  // 鈴木颯太
     ],
-    link: "../検索ページ/index.html#note"
+    link: "./index.html#note"
   },
   {
     hashes: [
