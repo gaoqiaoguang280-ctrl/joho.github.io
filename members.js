@@ -11,7 +11,7 @@ const members = [
     hashes: [
       "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b" // 例: "1"
     ],
-    link: "https://gaoqiaoguang280-ctrl.github.io/endpage.github.io/"
+    link: "https://gaoqiaoguang280-ctrl.github.io/searchpage.github.io/"
   },
   {
     hashes: [
