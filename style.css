@@ -107,7 +107,7 @@ strong{
 .nav-cta{
   color:var(--text)!important;
   border-color:var(--line)!important;
-  background:linear-gradient(135deg,#e6d5bf,#d2b89b);
+  background:linear-gradient(135deg,#eceae8,#ddd3c7);
 }
 
 .hero{
@@ -200,13 +200,6 @@ strong{
   box-shadow:0 6px 16px rgba(0,0,0,0.15);
 }
 
-.btn.primary{
-  background:linear-gradient(135deg,#e6d5bf,#d2b89b);
-}
-
-.btn.ghost{
-  background:transparent;
-}
 
 .hero-card{
   border:1px solid var(--line);
@@ -332,7 +325,7 @@ strong{
   gap:14px;
   flex-wrap:wrap;
   border:1px solid var(--line);
-  background:linear-gradient(135deg,#efe2cf,#e1c8a9);
+  background:#eee7dd;
   border-radius:18px;
   padding:16px;
 }
@@ -447,9 +440,31 @@ strong{
   .contact{
     grid-template-columns:1fr;
   }
-  .nav{
-    display:none;
+    .nav{
+    display:flex;
+    width:100%;
+    justify-content:flex-start;
+    gap:8px;
   }
+
+.header-inner{
+    flex-wrap:wrap;
+    align-items:flex-start;
+  }
+
+
+  .nav{
+    flex: 1 1 100%;
+  }
+
+
+  #searchForm{
+    flex: 1 1 240px;
+  }
+  .form-text{
+    width: min(100%, 320px);
+  }
+
   .tsumayouji-secret{
     position: static;
     transform: none;
