@@ -15,8 +15,8 @@ const members = [
   },
   {
     hashes: [
-      "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce" // 例: "2"
+      "3f8b3eb4a9ace1bc441e065aacab341ccd9dcdd378020ae5c9cdf39d45ffa9ff" // 例: "鈴木"
     ],
-    link: "../another/index.html"
+    link: "https://x.com/bytemeeeee60"
   }
 ];
