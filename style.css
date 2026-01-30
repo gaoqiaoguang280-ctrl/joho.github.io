@@ -250,6 +250,7 @@ strong{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
+  box-shadow: #000000;
 }
 
 .chip{
@@ -410,6 +411,8 @@ strong{
 }
 
 .secret-message{
+  color:rgba(242, 11, 11, 0.762);
+  text-shadow: #a75e1a;
   position: absolute;
   inset: 0;
   display: grid;
@@ -418,7 +421,7 @@ strong{
   font-size: 20px;
   font-weight: 700;
   opacity: 0;
-  transition: opacity .35s ease;
+  transition: opacity 1s ease;
 }
 
 .mystery-hint{
